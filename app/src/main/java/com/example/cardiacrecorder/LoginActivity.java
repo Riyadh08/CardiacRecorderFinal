@@ -2,8 +2,10 @@ package com.example.cardiacrecorder;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +14,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cardiacrecorder.classes.DataModel;
+import com.example.cardiacrecorder.classes.EachData;
+import com.example.cardiacrecorder.roomDb.BoardViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -86,10 +99,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
-                    finish();
-                    Intent intent = new Intent(getApplicationContext(), HomePage.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+//                        finish();
+                    downloadData((error, allData) -> {
+
+                        if(error != null) {
+                            Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        BoardViewModel viewModel = new ViewModelProvider(LoginActivity.this).get(BoardViewModel.class);
+                        for(EachData data : allData){
+                            viewModel.insert(data);
+                        }
+
+                        SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putBoolean("amILoggedIn",true);
+                        editor.apply();
+
+                        startActivity(new Intent(LoginActivity.this,HomePage.class));
+                        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                    });
                 }
                 else{
 
@@ -97,5 +127,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+    }
+    private void downloadData(DataListener listener){
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String userId = auth.getUid();
+
+        if(userId == null){
+            listener.onDataDownloaded(getString(R.string.failed_to_authenticate),null);
+            return;
+        }
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("data").child(userId);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<EachData> list = new ArrayList<>();
+                if(snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        try {
+                            DataModel model = ds.getValue(DataModel.class);
+                            if(model != null){
+                                list.add(new EachData(model));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                listener.onDataDownloaded(null,list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listener.onDataDownloaded(error.getMessage(),null);
+            }
+        });
+    }
+
+    private interface DataListener{
+        void onDataDownloaded(String error, List<EachData> allData);
     }
 }
