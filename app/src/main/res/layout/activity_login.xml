@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding = "20dp"
+    android:background="#22b2ff"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_gravity="center_horizontal"
+        app:lottie_rawRes="@raw/love_heart"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/signInEmailEditTextId"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#ffffff"
+        android:textColor="#ffffff"/>
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/signInPasswordEditTextId"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/signInButtonId"
+        android:text="Sign In"
+        android:textColor="#ffffff"
+        android:background="#ff0000"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/signUpTextViewId"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Don't have an account? Sign Up"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ProgressBarId"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+
+</LinearLayout>
