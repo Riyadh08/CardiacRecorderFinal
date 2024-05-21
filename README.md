@@ -46,12 +46,15 @@ Monitor your blood pressure and heart rate data in a simple, attractive, intuiti
 ![Screenshot 2024-05-21 181602](https://github.com/Riyadh08/CardiacRecorderFinal/assets/119655626/fad769bc-b944-4e3d-9fed-651fa33552e7)
 
 ## UML Design
+<img width="7314" alt="CardiacRecorderUML" src="https://github.com/Riyadh08/CardiacRecorderFinal/assets/119655626/25799371-4ed9-4d18-85dc-17e7cc13d487">
 
 ## Mockup Design
+![Your paragraph text (1)](https://github.com/Riyadh08/CardiacRecorderFinal/assets/119655626/fc3db718-98c7-4968-9b7a-7e87b6088e47)
 
 ## Contributors
 | Contributors 1             | Contributors 2                                                          |  Contributors 3 |      
 | ----------------- | ------------------------------------------------------------------ |-----------|
+| ![zain](https://github.com/Riyadh08/CardiacRecorderFinal/assets/119655626/800ae339-ad46-4fc6-9d78-2c5e832405b0) | ![290816487_5079489625501264_8976737029096767802_n](https://github.com/Riyadh08/CardiacRecorderFinal/assets/119655626/4ee7c79e-eda4-4e52-a053-b4ad72548a60) | ![428704909_940650397629296_7095694719998738191_n](https://github.com/Riyadh08/CardiacRecorderFinal/assets/119655626/4f896994-391e-4a56-91e0-43ef9aa8aaaf) |
 | Md. Ebrahim | Md. Rabiul Islam Riyad | Sujoy Sadhu |
 | Roll - 2007002 | Roll - 2007008 | Roll - 2007019 |
 | Github - https://github.com/EbrahimSiddik| Github - https://github.com/Riyadh08 | Github - https://github.com/SujoySadhu|
