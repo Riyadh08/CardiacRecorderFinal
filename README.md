@@ -23,7 +23,7 @@ Monitor your blood pressure and heart rate data in a simple, attractive, intuiti
 - Documentation Using Javadoc & Hosting Using Github.io
 - Documentation & User Guide Using README File & GitHub Wiki
 - Unit Tests & Intent Tests
-- Continuous Integration Using Travis CI with GitHub
+- Continuous Integration Using CI with GitHub
 - Splash Screen
 
 ## Special Features
