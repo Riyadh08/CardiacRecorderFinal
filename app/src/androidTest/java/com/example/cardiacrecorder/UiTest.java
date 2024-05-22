@@ -176,6 +176,8 @@ public class UiTest {
         safeSleep(4);
 
     }
+
+
     @Test
     public void testDeleteAll(){
 
