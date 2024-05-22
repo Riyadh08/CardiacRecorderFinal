@@ -41,6 +41,7 @@ public class UiTest {
 
     @Test
     public void testAppName() {
+
         onView(withText(R.string.app_name)).check(matches(isDisplayed()));
     }
 
