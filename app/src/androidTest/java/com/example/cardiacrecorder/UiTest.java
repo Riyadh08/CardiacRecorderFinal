@@ -1,0 +1,180 @@
+package com.example.cardiacrecorder;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.clearText;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertEquals;
+
+import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+
+import org.hamcrest.Matcher;
+import org.junit.Rule;
+import org.junit.Test;
+
+import java.util.Objects;
+
+public class UiTest {
+
+    private final String SYS = "62", SYS_NEW = "67";
+    private final String DYS = "102", DYS_NEW = "95";
+    private final String HEART = "80", HEART_NEW = "97";
+    private final String COMMENT = "No comment", COMMENT_NEW = "Modified wrong entry";
+
+    @Rule
+    public ActivityScenarioRule<HomePage> activityRule = new ActivityScenarioRule<>(HomePage.class);
+
+
+    @Test
+    public void testAppName() {
+        onView(withText(R.string.app_name)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void runAllTest(){ // will run all test in correct sequence
+        testAppName();
+        testDeleteAll(); // delete current list
+
+        addData(); // add single entry
+        testDetails(); // show details
+
+        testSimpleFilter(); // filter
+        testResetFilter(); // reset filter
+
+        editData(); // edit data
+        testSingleDelete(); // delete single entry
+
+        addData(); addData();
+        testDeleteAll(); // delete all data
+
+    }
+
+    @Test
+    public void addData(){
+
+        onView(withId(R.id.fabAdd)).perform(click());
+
+        onView(withId(R.id.editTextDt)).perform(click());
+
+//        onView(ViewMatchers.withClassName(Matchers.equalTo(DatePicker.class.getName())))
+//                .perform(PickerActions.setDate(2023, 10, 10));
+
+        onView(ViewMatchers.withText("OK")).perform(click());
+
+        onView(withId(R.id.editTextTime)).perform(click());
+
+        onView(ViewMatchers.withText("OK")).perform(click());
+
+        onView(withId(R.id.editTextSysPressure)).perform(ViewActions.typeText(SYS));
+
+        onView(withId(R.id.editTextDysPressure)).perform(ViewActions.typeText(DYS));
+
+        Espresso.pressBack(); //hide keyboard
+
+        onView(withId(R.id.editTextHeartRate)).perform(ViewActions.typeText(HEART));
+
+        Espresso.pressBack(); //hide keyboard
+        onView(withId(R.id.editTextComment)).perform(ViewActions.typeText(COMMENT));
+
+        Espresso.pressBack(); //hide keyboard
+
+        int prevCount = getTotalItem();
+
+        onView(withId(R.id.buttonSave)).perform(click());
+
+        Espresso.pressBack();
+        safeSleep(2);
+
+        int curCount = getTotalItem();
+
+        assertEquals(prevCount,curCount-1);
+        safeSleep(4);
+    }
+
+    @Test
+    public void testDetails(){
+
+        int index = getTotalItem()-1;
+
+        onView(withId(R.id.rvList)).perform(RecyclerViewActions.actionOnItemAtPosition(index, click()));
+
+        onView(withId(R.id.tvSysPressure)).check(matches(isDisplayed()));
+
+        onView(withText(SYS +"mm Hg")).check(matches(isDisplayed()));
+        onView(withText(DYS +"mm Hg")).check(matches(isDisplayed()));
+        onView(withText(HEART +"BPM")).check(matches(isDisplayed()));
+        onView(withText(COMMENT)).check(matches(isDisplayed()));
+
+        Espresso.pressBack();
+        safeSleep(4);
+    }
+
+    @Test
+    public void editData(){
+
+        onView(withId(R.id.rvList))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.clickChildViewWithId(R.id.ivMore)));
+
+        onView(withText("Edit")).inRoot(isPlatformPopup()).perform(click());
+
+        onView(withId(R.id.editTextSysPressure)).perform(clearText());
+        onView(withId(R.id.editTextSysPressure)).perform(ViewActions.typeText(SYS_NEW));
+
+        Espresso.pressBack(); //hide keyboard
+        onView(withId(R.id.editTextDysPressure)).perform(clearText());
+        onView(withId(R.id.editTextDysPressure)).perform(ViewActions.typeText(DYS_NEW));
+
+        Espresso.pressBack(); //hide keyboard
+        onView(withId(R.id.editTextHeartRate)).perform(clearText());
+        onView(withId(R.id.editTextHeartRate)).perform(ViewActions.typeText(HEART_NEW));
+
+        Espresso.pressBack(); //hide keyboard
+        onView(withId(R.id.editTextComment)).perform(clearText());
+        onView(withId(R.id.editTextComment)).perform(ViewActions.typeText(COMMENT_NEW));
+
+        Espresso.pressBack(); //hide keyboard
+
+        int prevCount = getTotalItem();
+
+        onView(withId(R.id.buttonSave)).perform(click());
+
+        Espresso.pressBack();
+        safeSleep(2);
+
+        int curCount = getTotalItem();
+
+        assertEquals(prevCount,curCount);
+        safeSleep(4);
+    }
+
+    @Test
+    public void testSingleDelete(){
+        onView(withId(R.id.rvList)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.clickChildViewWithId(R.id.ivMore))
+        );
+        int prevCount = getTotalItem();
+
+        onView(withText("Delete")).inRoot(isPlatformPopup()).perform(click());
+
+        int curCount = getTotalItem();
+
+        assertEquals(prevCount,curCount+1);
+        safeSleep(4);
+
+    }
+
+}
