@@ -70,4 +70,16 @@ dependencies {
 
     // Browser for showing Captcha
     implementation("androidx.browser:browser:1.5.0")
+
+    //For integraton testing
+        // JUnit
+        testImplementation ("junit:junit:4.13.2")
+
+        // Mockito
+        testImplementation ("org.mockito:mockito-core:5.2.0")
+        testImplementation ("org.mockito:mockito-inline:5.2.0")
+
+        // Robolectric
+        testImplementation ("org.robolectric:robolectric:4.8.2")
+
 }
