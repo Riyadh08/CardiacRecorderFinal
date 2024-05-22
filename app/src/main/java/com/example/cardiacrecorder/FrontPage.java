@@ -32,12 +32,12 @@ public class FrontPage extends AppCompatActivity {
             SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
             Intent intent;
             if(sp.getBoolean("amILoggedIn",false)){
-               //intent = new Intent(this, HomePage.class);
+               intent = new Intent(this, HomePage.class);
             }
             else{
-               // intent = new Intent(this, LoginActivity.class);
+               intent = new Intent(this, LoginActivity.class);
             }
-            //startActivity(intent);
+            startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         },2000);
 
