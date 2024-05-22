@@ -30,7 +30,6 @@ Monitor your blood pressure and heart rate data in a simple, attractive, intuiti
 - Data Filter with Date, Sys Pressure, Dys Pressure & Heart Rate Conditions
 - Sorting by Sys Pressure, Dys Pressure & Heart Rate
 - Online and Offline Database Implementation
-- Login Using Only OTP with No Extra Password Requirement
 - Double Indicator For Data Check
 - Dynamic Motion Splash Screen
 ## Screenshots
