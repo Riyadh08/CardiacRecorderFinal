@@ -176,5 +176,96 @@ public class UiTest {
         safeSleep(4);
 
     }
+    @Test
+    public void testDeleteAll(){
 
+        while (true){
+            try {
+                onView(withId(R.id.rvList)).perform(
+                        RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.clickChildViewWithId(R.id.ivMore))
+                );
+                safeSleep();
+                onView(withText("Delete"))
+                        .inRoot(isPlatformPopup())
+                        .perform(click());
+                safeSleep(2);
+            }catch (Exception ignored){
+                break;
+            }
+        }
+
+        onView(withId(R.id.tvNoData)).check(matches(isDisplayed()));
+        safeSleep(4);
+    }
+
+
+    @Test
+    public void testResetFilter(){
+        onView(withId(R.id.clFilterOption)).perform(click());
+
+        safeSleep(2);
+        onView(withId(R.id.rvSys)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.rvDys)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+        onView(withId(R.id.rvHeartRate)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+
+        onView(withId(R.id.buttonSaveFilter)).perform(click());
+
+        onView(withId(R.id.tvNoData)).check(matches(not(isDisplayed())));
+        safeSleep(4);
+    }
+    @Test
+    public void testSimpleFilter(){
+        onView(withId(R.id.clFilterOption)).perform(click());
+
+        safeSleep(2);
+        onView(withId(R.id.rvSys)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.rvDys)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+        onView(withId(R.id.rvHeartRate)).perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+
+        onView(withId(R.id.buttonSaveFilter)).perform(click());
+
+        onView(withId(R.id.tvNoData)).check(matches(isDisplayed()));
+        safeSleep(4);
+    }
+
+    public static class MyViewAction {
+
+        public static ViewAction clickChildViewWithId(final int id) {
+            return new ViewAction() {
+                @Override
+                public Matcher<View> getConstraints() {
+                    return ViewMatchers.isAssignableFrom(RecyclerView.class);
+                }
+
+                @Override
+                public String getDescription() {
+                    return "Click on a child view with specified id.";
+                }
+
+                @Override
+                public void perform(UiController uiController, View view) {
+                    View v = view.findViewById(id);
+                    v.performClick();
+                }
+            };
+        }
+
+    }
+
+    private int getTotalItem(){
+        final int[] initialItemCount = new int[1];
+        activityRule.getScenario().onActivity(activity -> {
+            if( ((RecyclerView)activity.findViewById(R.id.rvList)).getAdapter() != null ) {
+                initialItemCount[0] = Objects.requireNonNull(((RecyclerView) activity.findViewById(R.id.rvList)).getAdapter()).getItemCount();
+            }
+        });
+        return initialItemCount[0];
+    }
+
+
+    private static void safeSleep(long ...args){
+        try{
+            Thread.sleep(args.length > 0 ? args[0]*500 : 500);
+        }catch (Exception ignored){}
+    }
 }
