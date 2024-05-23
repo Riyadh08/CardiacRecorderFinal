@@ -402,6 +402,10 @@ public class EachData implements Serializable {
         return comment==null || comment.trim().isEmpty() ? "No comment" : comment;
     }
 
+    /**
+     * formats comment
+     * @return comment
+     */
     public static String getElapsedTime(long startTime, long endTime) {
         long duration = endTime - startTime;
         long days = TimeUnit.MILLISECONDS.toDays(duration);
@@ -430,6 +434,10 @@ public class EachData implements Serializable {
         return sb.append("ago").toString();
     }
 
+    /**
+     * returns DataModel object
+     * @return DataModel object
+     */
     public DataModel getModel(){
         return new DataModel(id,timestamp,date,time,epochDate,sysPressure,dysPressure,heartRate,comment);
     }

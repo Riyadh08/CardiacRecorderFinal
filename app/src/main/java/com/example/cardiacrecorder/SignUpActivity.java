@@ -46,6 +46,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         signUpButton.setOnClickListener(this);
     }
 
+    /**
+     * onClick method for the buttons
+     * @param view the view that is clicked
+     */
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.signUpButtonId){

@@ -37,6 +37,12 @@ public class MyTimePicker extends DialogFragment implements TimePickerDialog.OnT
 
     }
 
+    /**
+     * sets time
+     * @param timePicker The view associated with this listener.
+     * @param hour The hour of the day (0-23).
+     * @param min The minute of the hour (0-59).
+     */
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int min) {

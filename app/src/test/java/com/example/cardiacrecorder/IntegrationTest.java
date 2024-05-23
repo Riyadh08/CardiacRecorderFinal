@@ -9,9 +9,14 @@ import org.mockito.Mockito;
 
 import java.util.List;
 import java.util.Arrays;
-
+/**
+ * Integration test for EachData processing
+ */
 public class IntegrationTest {
 
+    /**
+     * Integration test for EachData processing
+     */
     @Test
     public void testEachDataProcessing() {
         // Creating test data
