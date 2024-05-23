@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             UserLogin();
         }
         else if(view.getId() == R.id.signUpTextViewId){
-            Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+            Intent intent = new Intent(getApplicationContext(), OTPActivity.class);
             startActivity(intent);
         }
 

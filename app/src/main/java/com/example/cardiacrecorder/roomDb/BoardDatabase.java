@@ -19,6 +19,7 @@ public abstract class BoardDatabase extends RoomDatabase {
      * create instance of board database
      * @param context object
      * @return Single-tone instance of board database class
+     * This follow singleton pattern
      */
     public static BoardDatabase getInstance(Context context){
 
