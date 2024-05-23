@@ -1,8 +1,5 @@
 package com.example.cardiacrecorder;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,13 +9,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
+public class OTPActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText signUpEmailEditText, signUpPasswordEditText;
     private TextView signInTextView;
@@ -46,10 +46,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         signUpButton.setOnClickListener(this);
     }
 
-    /**
-     * onClick method for the buttons
-     * @param view the view that is clicked
-     */
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.signUpButtonId){

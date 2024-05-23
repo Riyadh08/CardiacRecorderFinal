@@ -15,7 +15,10 @@ public class BoardRepository {//Repository Link Notice
 
     private final BoardDao boardDao;
     private final LiveData<List<EachData>> allData;
-
+    /**
+     * Constructor
+     * @param application object
+     */
     public BoardRepository(Application application){//application is a subclass of context
         BoardDatabase boardDatabase = BoardDatabase.getInstance(application);
         boardDao = boardDatabase.boardDao();

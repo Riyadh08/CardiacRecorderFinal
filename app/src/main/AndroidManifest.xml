@@ -27,7 +27,7 @@
             android:name=".HomePage"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".OTPActivity"
             android:exported="false" />
         <activity
             android:name=".FrontPage"
