@@ -38,6 +38,9 @@ public class UiTest {
     @Rule
     public ActivityScenarioRule<HomePage> activityRule = new ActivityScenarioRule<>(HomePage.class);
 
+    /**
+     * Test if app name is displayed
+     */
 
     @Test
     public void testAppName() {
@@ -45,6 +48,9 @@ public class UiTest {
         onView(withText(R.string.app_name)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Run all test in sequence
+     */
     @Test
     public void runAllTest(){ // will run all test in correct sequence
         testAppName();
@@ -63,6 +69,10 @@ public class UiTest {
         testDeleteAll(); // delete all data
 
     }
+
+    /**
+     * Test if app Data is displayed
+     */
 
     @Test
     public void addData(){
@@ -105,7 +115,9 @@ public class UiTest {
         assertEquals(prevCount,curCount-1);
         safeSleep(4);
     }
-
+    /**
+     * Test if testDetails is displayed
+     */
     @Test
     public void testDetails(){
 
@@ -124,6 +136,9 @@ public class UiTest {
         safeSleep(4);
     }
 
+    /**
+     * Test if editData is displayed
+     */
     @Test
     public void editData(){
 
@@ -162,6 +177,9 @@ public class UiTest {
         safeSleep(4);
     }
 
+    /**
+     * Test if testSingleDelete is displayed
+     */
     @Test
     public void testSingleDelete(){
         onView(withId(R.id.rvList)).perform(
@@ -178,7 +196,9 @@ public class UiTest {
 
     }
 
-
+    /**
+     * Test if testDeleteAll is displayed
+     */
     @Test
     public void testDeleteAll(){
 
@@ -201,6 +221,9 @@ public class UiTest {
         safeSleep(4);
     }
 
+    /**
+     * Test if testResetFilter is displayed
+     */
 
     @Test
     public void testResetFilter(){
@@ -216,6 +239,10 @@ public class UiTest {
         onView(withId(R.id.tvNoData)).check(matches(not(isDisplayed())));
         safeSleep(4);
     }
+
+    /**
+     * Test if testSimpleFilter is displayed
+     */
     @Test
     public void testSimpleFilter(){
         onView(withId(R.id.clFilterOption)).perform(click());
@@ -254,6 +281,11 @@ public class UiTest {
         }
 
     }
+
+    /**
+     * Get total item in recycler view
+     * @return total item
+     */
 
     private int getTotalItem(){
         final int[] initialItemCount = new int[1];

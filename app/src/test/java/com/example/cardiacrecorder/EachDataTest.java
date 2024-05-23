@@ -18,7 +18,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * This class contains the test cases for the EachData class
+ */
 public class EachDataTest {
+    /**
+     * This test case checks if the getEpochDate method returns the correct epoch date
+     */
     @Test
     public void testGetEpochDate() {
         String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.US));
@@ -29,6 +35,9 @@ public class EachDataTest {
         Assert.assertEquals(expectedEpochDate, epochDate);
     }
 
+    /**
+     * This test case checks if the getEpochDate method returns the minimum value for an invalid date
+     */
     @Test
     public void testGetEpochDateInvalidDate() {
         String invalidDate = "Invalid Date";
@@ -38,7 +47,9 @@ public class EachDataTest {
 
         Assert.assertEquals(expectedEpochDate, epochDate);
     }
-
+    /**
+     * This test case checks if the testIsSysUnusual method returns the correct value for systolic pressure
+     */
     @Test
     public void testIsSysUnusual() {
         int id = 1;
@@ -67,6 +78,9 @@ public class EachDataTest {
         Assert.assertTrue("Failed for sysPressure = 141", data.isSysUnusual());
     }
 
+    /**
+     * This test case checks if the getSysStatus method returns the correct status
+     */
     @Test
     public void testGetSysStatus() {
         int id = 1;
@@ -89,6 +103,9 @@ public class EachDataTest {
         Assert.assertEquals("high", data.getSysStatus());
     }
 
+    /**
+     * This test case checks if the getHeartRateStatus method returns the correct status
+     */
     @Test
     public void testGetHeartRateStatus() {
         int id = 1;
@@ -111,6 +128,9 @@ public class EachDataTest {
         Assert.assertEquals("high", data.getHeartRateStatus());
     }
 
+    /**
+     * This test case checks if the testIsDysUnusual method returns the correct value
+     */
     @Test
     public void testIsDysUnusual() {
         int id = 1;
@@ -139,6 +159,9 @@ public class EachDataTest {
         Assert.assertFalse("Failed for dysPressure = 90", data.isDysUnusual());
     }
 
+    /**
+     * This test case checks if the testIsHeartRateUnusual method returns the correct value
+     */
     @Test
     public void testIsHeartRateUnusual() {
         int id = 1;
@@ -167,6 +190,9 @@ public class EachDataTest {
         Assert.assertFalse("Failed for heartRate = 100", data.isHeartRateUnusual());
     }
 
+    /**
+     * This test case checks if the testGetDysStatus method returns the correct status
+     */
     @Test
     public void testGetDysStatus() {
         int id = 1;
@@ -189,6 +215,9 @@ public class EachDataTest {
         Assert.assertEquals("high", data.getDysStatus());
     }
 
+    /**
+     * This test case checks if the testIsIdSame method returns the correct value
+     */
     @Test
     public void testIsIdSame() {
         int id1 = 1;
@@ -204,6 +233,10 @@ public class EachDataTest {
         Assert.assertFalse(isSame2);
     }
 
+    /**
+     * This test case checks if the testIsFullySame method returns the correct value
+     */
+
     @Test
     public void testIsFullySame() {
         EachData originalData = new EachData(1, 123456789, "01-01-2023", "12:00AM", 120, 80, 70, "Comment");
@@ -216,6 +249,10 @@ public class EachDataTest {
         Assert.assertTrue(isSame1);
         Assert.assertFalse(isSame2);
     }
+
+    /**
+     * This test case checks if the testGetFormattedSysPressure method returns the correct formatted date
+     */
 
     @Test
     public void testGetFormattedSysPressure() {
@@ -233,6 +270,9 @@ public class EachDataTest {
         Assert.assertEquals("120mm Hg", data.getFormattedSysPressure());
     }
 
+    /**
+     * This test case checks if the testGetSpannableSys method returns the correct formatted date
+     */
     @Test
     public void testGetSpannableSys() {
         int sysPressure = 120;
@@ -261,6 +301,9 @@ public class EachDataTest {
         Assert.assertEquals(expectedSpans.length, spans.length);
     }
 
+    /**
+     * This test case checks if the testGetSysBackground method returns the correct formatted date
+     */
     @Test
     public void testGetSysBackground() {
         int sysPressure = 120;
@@ -273,6 +316,9 @@ public class EachDataTest {
         Assert.assertEquals(expectedBackground, actualBackground);
     }
 
+    /**
+     * This test case checks if the testGetDysBackground method returns the correct formatted date
+     */
     @Test
     public void testGetDysBackground() {
         int dysPressure = 80;
@@ -285,6 +331,9 @@ public class EachDataTest {
         Assert.assertEquals(expectedBackground, actualBackground);
     }
 
+    /**
+     * This test case checks if the testGetHeartBackground method returns the correct formatted date
+     */
     @Test
     public void testGetHeartBackground() {
         int heartRate = 80;
@@ -296,6 +345,10 @@ public class EachDataTest {
 
         Assert.assertEquals(expectedBackground, actualBackground);
     }
+
+    /**
+     * This test case checks if the testGetSpannableDys method returns the correct formatted date
+     */
 
     @Test
     public void testGetSpannableDys() {
@@ -327,6 +380,9 @@ public class EachDataTest {
         Assert.assertEquals(expectedSpans.length, spans.length);
     }
 
+    /**
+     * This test case checks if the testGetSpannableHeart method returns the correct formatted date
+     */
     @Test
     public void testGetSpannableHeart() {
         int heartRate = 70;
@@ -354,6 +410,10 @@ public class EachDataTest {
         Assert.assertEquals(expectedSpans.length, spans.length);
     }
 
+    /**
+     * This test case checks if the testGetFormattedDysPressure method returns the correct formatted date
+     */
+
     @Test
     public void testGetFormattedDysPressure() {
         int dysPressure = 80;
@@ -366,6 +426,9 @@ public class EachDataTest {
         Assert.assertEquals(expectedFormattedDysPressure, formattedDysPressure);
     }
 
+    /**
+     * This test case ckecks if the testGetSpannableDateTime method returns the correct formatted date
+     */
     @Test
     public void testGetSpannableDateTime() {
         long timestamp = 123456789;
@@ -396,6 +459,9 @@ public class EachDataTest {
         Assert.assertEquals(expectedSpans.length, spans.length);
     }
 
+    /**
+     * This test case checks if the getFormattedDate method returns the correct formatted date
+     */
     @Test
     public void testGetFormattedHeartRate() {
         int heartRate = 80;

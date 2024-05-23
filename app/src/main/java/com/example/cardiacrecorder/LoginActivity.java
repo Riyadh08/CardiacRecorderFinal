@@ -70,6 +70,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+    /**
+     * Method to login user
+     */
 
     private void UserLogin() {
         String email = signInEmailEditText.getText().toString().trim();
@@ -128,6 +131,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+
+    /**
+     * Method to download data from firebase
+     * @param listener to listen for data download
+     */
     private void downloadData(DataListener listener){
 
         FirebaseAuth auth = FirebaseAuth.getInstance();

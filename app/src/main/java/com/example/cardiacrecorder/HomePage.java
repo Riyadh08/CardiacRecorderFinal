@@ -292,6 +292,9 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
+    /**
+     * logs out user
+     */
     private void logOutUser(){
         showSafeToast(getString(R.string.please_wait));
         backupData(error -> {
@@ -314,6 +317,10 @@ public class HomePage extends AppCompatActivity {
     private interface BackupListener{
         void onBackupProcessed(String error);
     }
+    /**
+     * backs up data to firebase
+     * @param listener to listen to the backup process
+     */
     private void backupData(BackupListener listener){
         if( allData == null || allData.isEmpty()) {
             listener.onBackupProcessed(null);
@@ -346,13 +353,18 @@ public class HomePage extends AppCompatActivity {
 
     }
 
+    /**
+     * for showing search and more icon in top above
+     */
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_bar_menu, menu);
         return true;
     }
-    //for showing search and more icon in top above
+    /**
+     * for logout
+     */
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -376,6 +388,7 @@ public class HomePage extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (isSheetShowing) {
             filterViewModel.setShowOrHide(false);
         } else {

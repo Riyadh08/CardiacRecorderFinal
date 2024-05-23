@@ -36,7 +36,13 @@ public class MyDatePicker extends DialogFragment implements DatePickerDialog.OnD
 
         return new DatePickerDialog(requireContext(), this, year, month, day);
     }
-
+    /**
+     * sets date
+     * @param datePicker The view associated with this listener.
+     * @param year The year that was set.
+     * @param month The month that was set (0-11) for compatibility with {@link java.util.Calendar}.
+     * @param day The day of the month that was set.
+     */
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
